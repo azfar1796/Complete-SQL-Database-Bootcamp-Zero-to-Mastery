@@ -5,7 +5,9 @@
 * Sample output: https://imgur.com/vXs4093
 * Use EXTRACT (YEAR FROM AGE(birth_date)) we will learn about this in later parts of the course
 */
-SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
+
+SELECT emp_no,first_name,EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees
+where first_name like 'M%'
 
 
 /*
@@ -14,6 +16,8 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Question: How many people's name start with A and end with R?
 * Expected output: 1846
 */
+SELECT count(first_name) from employees
+where first_name like 'A%r'
 
                                                   
 /*
@@ -23,6 +27,12 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Expected output: 4211 
 */
 
+SELECT count(zip) from customers
+where zip::varchar like '%2%'
+
+SELECT count(zip) from customers
+where cast(zip as varchar) like '%2%'
+                                                
 
 
 /*
@@ -31,7 +41,11 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Question: How many people's zipcode start with 2 with the 3rd character being a 1.
 * Expected output: 109 
 */
+SELECT count(zip) from customers
+where cast(zip as varchar) like '2_1%'
 
+SELECT count(zip) from customers
+where zip::varchar like '2_1%'
 
 /*
 * DB: Store
@@ -40,4 +54,6 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Replace null values with "No State"                                                  
 * Expected output: https://imgur.com/AVe6G4c
 */
+SELECT COALESCE(state, 'No State') , phone from customers
+WHERE PHONE::VARCHAR LIKE '302%'
 
