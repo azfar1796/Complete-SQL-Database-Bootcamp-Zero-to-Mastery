@@ -2,10 +2,13 @@
 -- (include 30 and 50 in the results)
 
 /*
-* Write your query here
+SELECT * from customers
+where age BETWEEN 30 AND 50
 */
 
 -- What is the average income between the ages of 20 and 50? (Including 20 and 50)
 /*
-* Write your query here
+SELECT round(avg(income))
+from customers
+where age BETWEEN 20 AND 50
 */
